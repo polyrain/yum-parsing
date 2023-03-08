@@ -1,4 +1,8 @@
-# Using a Heap here with inbuilt tools, will break this down soon
+# Assumptions made: 
+#   - Numbers in file are integers only. If they're not, we just need to change the conversion to be more broad.
+#   - Whitespace is not considered invalid
+#   - I'm just going to assume the numbers in the file are sane enough for Python, which has unbounded ints. 
+
 import heapq, argparse
 
 def calculate_top_x(x: int, path: str) -> None:

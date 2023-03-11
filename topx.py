@@ -26,8 +26,8 @@ def calculate_top_x(x: int, path: str) -> None:
     since we know they're integers (assumed no floats), so could do a radix sort. 
     """
     heap = []
-    with open(path, 'r') as numbers:
-        try:
+    try:
+        with open(path, 'r') as numbers:
             for line in numbers:
                 if line.isspace():
                     continue
@@ -36,9 +36,12 @@ def calculate_top_x(x: int, path: str) -> None:
                 elif (new_val := int(line)) > heap[0]: # We've reached a heap of X elements. If we still are processing, we now need to check if the element is bigger than the root; ie bigger than smallest
                     heapq.heappushpop(heap, new_val)
                 # Otherwise, it was smaller than smallest, so don't bother                    
-        except ValueError:
-            print('Invalid text input in file. Please provide only single integers on each line.')   
-            exit(1)
+    except ValueError:
+        print('Invalid text input in file. Please provide only single integers on each line.')   
+        exit(1)
+    except OSError as e:
+        print('File couldn\'t be opened', e)
+        exit(1)
     
     # Once we're here, we can simply sort the heap to a normal list and return it
     return sorted(heap, reverse=True)

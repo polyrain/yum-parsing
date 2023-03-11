@@ -36,8 +36,8 @@ def calculate_top_x(x: int, path: str) -> None:
                 elif (new_val := int(line)) > heap[0]: # We've reached a heap of X elements. If we still are processing, we now need to check if the element is bigger than the root; ie bigger than smallest
                     heapq.heappushpop(heap, new_val)
                 # Otherwise, it was smaller than smallest, so don't bother                    
-    except ValueError:
-        print('Invalid text input in file. Please provide only single integers on each line.')   
+    except ValueError as e:
+        print('Invalid text input in file. Please provide only single integers on each line.', e)   
         exit(1)
     except OSError as e:
         print('File couldn\'t be opened', e)

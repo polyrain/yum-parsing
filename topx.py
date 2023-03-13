@@ -10,7 +10,7 @@ def calculate_top_x(x: int, path: str) -> None:
     We iterate each line of the file, parsing it as an integer
     and confirming if its value is bigger than the smallest element
     in our current list. We use a Heap to back this since it has O(log(n))
-    insertion and O(1) deletion, giving us a runtime complexity of O(n*log(x)),
+    insertion and O(log(n)) deletion, giving us a runtime complexity of O(n*log(x)),
     where x is the size of the heap required and n is the number of lines in the file.
     Finally, we sort the array which yields a runtime complexity of O(x*log(x)) where x is
     again the number of elements in the heap. This is potentially smaller than the complexity of
@@ -33,7 +33,8 @@ def calculate_top_x(x: int, path: str) -> None:
                     continue
                 if len(heap) < x:
                     heapq.heappush(heap, int(line))
-                elif (new_val := int(line)) > heap[0]: # We've reached a heap of X elements. If we still are processing, we now need to check if the element is bigger than the root; ie bigger than smallest
+                # We've reached a heap of X elements. If we still are processing, we now need to check if the element is bigger than the root; ie bigger than smallest
+                elif (new_val := int(line)) > heap[0]: 
                     heapq.heappushpop(heap, new_val)
                 # Otherwise, it was smaller than smallest, so don't bother                    
     except ValueError as e:
